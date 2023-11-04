@@ -1,0 +1,49 @@
+.profile {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.profile__photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.profile__name {
+  margin: 0;
+  padding: 0;
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 48px;
+  color: white;
+  position: absolute;
+  top: 22px;
+  left: 150px;
+}
+
+.profile__occupation {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  color: white;
+  position: absolute;
+  top: 60px;
+  left: 150px;
+}
+
+.profile__button {
+  cursor: pointer;
+}
+
+.profile__button:hover {
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.profile__button_edit {
+  position: absolute;
+  top: 37px;
+  left: 538px;
+}

@@ -1,0 +1,9 @@
+.homepage {
+  max-width: 1280px;
+  width: 880px;
+  background-color: black;
+  margin: 0 auto;
+  padding: 0 200px;
+  font-family: "Inter", sans-serif;
+  position: relative;
+}
