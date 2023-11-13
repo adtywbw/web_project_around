@@ -1,36 +1,43 @@
 .profile {
+  width: 100%;
   margin-top: 40px;
-  display: flex;
-  justify-content: space-between;
-  position: relative;
+  display: grid;
+  grid-template-columns: 150px 1fr 150px;
+  grid-template-rows: 60px 60px;
+  grid-template-areas:
+    "photo name add"
+    "photo occupation add";
 }
 
 .profile__photo {
   width: 120px;
   height: 120px;
   border-radius: 50%;
+  grid-area: photo;
+}
+
+.profile__tagname {
+  margin-top: 30px;
+  display: flex;
+  grid-area: name;
 }
 
 .profile__name {
   margin: 0;
-  padding: 0;
   font-size: 42px;
   font-weight: 500;
   line-height: 48px;
   color: white;
-  position: absolute;
-  top: 22px;
-  left: 150px;
+  grid-area: name;
 }
 
 .profile__occupation {
+  margin-top: 22px;
   font-size: 18px;
   font-weight: 400;
   line-height: 22px;
   color: white;
-  position: absolute;
-  top: 60px;
-  left: 150px;
+  grid-area: occupation;
 }
 
 .profile__button {
@@ -43,7 +50,70 @@
 }
 
 .profile__button_edit {
-  position: absolute;
-  top: 37px;
-  left: 538px;
+  margin: 16px 0 0 18px;
+  width: 24px;
+  height: 24px;
+}
+
+.profile__button_add {
+  background-image: url(../images/add-button.svg);
+  background-size: contain;
+  width: 150px;
+  height: 50px;
+  margin-top: 37px;
+  grid-area: add;
+}
+
+@media screen and (min-width: 320px) and (max-width: 879px) {
+  .profile {
+    margin: 42px 0 36px;
+    grid-template-columns: 1fr;
+    grid-template-rows: 150px 36px 50px 50px;
+    grid-template-areas:
+      "photo"
+      "name"
+      "occupation"
+      "add";
+  }
+
+  .profile__photo {
+    margin: 0 auto;
+  }
+
+  .profile__tagname {
+    margin: 0 auto;
+    display: flex;
+    grid-area: name;
+  }
+
+  .profile__name {
+    margin: 0;
+    text-align: end;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 26px;
+    color: white;
+  }
+
+  .profile__occupation {
+    margin: 0 auto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    color: white;
+  }
+
+  .profile__button_edit {
+    margin: 3px 0 0 10px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .profile__button_add {
+    margin: 0 auto;
+    background-image: url(../images/add-button-wide.svg);
+    background-size: contain;
+    width: 282px;
+    height: 50px;
+  }
 }
