@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Around The U.S.</title>
     <link rel="stylesheet" href="./pages/index.css" />
-    <script src="./scripts/script.js"></script>
   </head>
   <body class="homepage">
     <header class="header">
@@ -14,7 +13,6 @@
         src="./images/header_logo.svg"
         alt="header's logo"
       />
-      <hr class="header__line" />
     </header>
 
     <main class="content">
@@ -25,29 +23,36 @@
           alt="Jacques Cousteau'photo"
         />
         <div class="profile__tagname">
-          <h3 class="profile__name">Jacques Cousteau</h3>
-          <img
+          <h1 class="profile__name">Jacques Cousteau</h1>
+          <button
             class="profile__button profile__button_edit"
-            src="./images/edit-button.svg"
-            alt="edit button"
-          />
+            type="button"
+          ></button>
         </div>
         <p class="profile__occupation">Penjelajah</p>
-
-        <div class="profile__button profile__button_add"></div>
+        <button
+          class="profile__button profile__button_add"
+          type="button"
+        ></button>
       </section>
 
       <div class="popup">
-        <img
-          class="popup__close"
-          src="./images/close-button.png"
-          alt="close button"
-        />
         <div class="popup__container">
+          <button class="popup__close" type="button"></button>
           <h3 class="popup__title">Edit profil</h3>
-          <input class="popup__item popup__item_name" type="text" />
-          <input class="popup__item popup__item_occupation" type="text" />
-          <button class="popup__button">Simpan</button>
+          <form id="popupForm">
+            <input
+              class="popup__item popup__item_name"
+              type="text"
+              name="username"
+            />
+            <input
+              class="popup__item popup__item_occupation"
+              type="text"
+              name="occupation"
+            />
+            <button class="popup__button" type="submit">Simpan</button>
+          </form>
         </div>
       </div>
       <section class="gallery">
@@ -59,11 +64,7 @@
           />
           <div class="gallery__tagname">
             <p class="gallery__name">Antelope Canyon</p>
-            <img
-              class="gallery__love"
-              src="./images/love.svg"
-              alt="love button"
-            />
+            <button class="gallery__love" type="button"></button>
           </div>
         </div>
         <div class="gallery__item">
@@ -74,11 +75,7 @@
           />
           <div class="gallery__tagname">
             <p class="gallery__name">Carlsbad Cavern</p>
-            <img
-              class="gallery__love"
-              src="./images/love.svg"
-              alt="love button"
-            />
+            <button class="gallery__love" type="button"></button>
           </div>
         </div>
         <div class="gallery__item">
@@ -89,11 +86,7 @@
           />
           <div class="gallery__tagname">
             <p class="gallery__name">Mount Rushmore</p>
-            <img
-              class="gallery__love"
-              src="./images/love.svg"
-              alt="love button"
-            />
+            <button class="gallery__love" type="button"></button>
           </div>
         </div>
         <div class="gallery__item">
@@ -104,11 +97,7 @@
           />
           <div class="gallery__tagname">
             <p class="gallery__name">Niagara Falls</p>
-            <img
-              class="gallery__love"
-              src="./images/love.svg"
-              alt="love button"
-            />
+            <button class="gallery__love" type="button"></button>
           </div>
         </div>
         <div class="gallery__item">
@@ -119,11 +108,7 @@
           />
           <div class="gallery__tagname">
             <p class="gallery__name">Waikiki Beach</p>
-            <img
-              class="gallery__love"
-              src="./images/love.svg"
-              alt="love button"
-            />
+            <button class="gallery__love" type="button"></button>
           </div>
         </div>
         <div class="gallery__item">
@@ -134,11 +119,7 @@
           />
           <div class="gallery__tagname">
             <p class="gallery__name">Yosemite National Park</p>
-            <img
-              class="gallery__love"
-              src="./images/love.svg"
-              alt="love button"
-            />
+            <button class="gallery__love" type="button"></button>
           </div>
         </div>
       </section>
@@ -147,5 +128,6 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2021 Arount The U.S.</p>
     </footer>
+    <script src="./scripts/script.js"></script>
   </body>
 </html>

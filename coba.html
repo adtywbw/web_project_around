@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulir Penyimpanan Data</title>
+    <style>
+      #hasilSubmit {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Formulir Penyimpanan Data</h2>
+
+    <form id="myForm">
+      <label for="nama">Nama:</label>
+      <input type="text" id="nama" name="nama" required />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <div id="hasilSubmit"></div>
+
+    <script>
+      document
+        .getElementById("myForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          // Mendapatkan nilai input dari formulir
+          var namaValue = document.getElementById("nama").value;
+          var emailValue = document.getElementById("email").value;
+
+          // Membuat objek untuk menyimpan data
+          var data = {
+            nama: namaValue,
+            email: emailValue,
+          };
+
+          // Panggil fungsi untuk menyimpan data
+          simpanData(data);
+
+          // Tampilkan hasil submit di layar
+          tampilkanHasilSubmit(data);
+        });
+
+      function simpanData(data) {
+        // Lakukan operasi penyimpanan data di sini
+        // Misalnya, tampilkan data atau kirim ke server
+        console.log("Data yang akan disimpan:", data);
+
+        // Simpan ke localStorage (hanya contoh, sebaiknya digunakan dengan hati-hati)
+        localStorage.setItem("savedData", JSON.stringify(data));
+      }
+
+      function tampilkanHasilSubmit(data) {
+        // Menampilkan hasil submit di layar
+        var hasilSubmitElement = document.getElementById("hasilSubmit");
+        hasilSubmitElement.innerHTML = `
+        <h3>Hasil Submit:</h3>
+        <p>Nama: ${data.nama}</p>
+        <p>Email: ${data.email}</p>
+      `;
+      }
+    </script>
+  </body>
+</html>

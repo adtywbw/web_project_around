@@ -9,12 +9,12 @@
   margin-bottom: 41px;
 }
 
-.header__line {
+.header::after {
+  content: "";
   box-sizing: border-box;
-  width: 100%;
-  border: 1px solid #545454;
+  display: block;
+  border-bottom: 1px solid #545454;
   opacity: 0.7;
-  font-size: 0;
 }
 
 @media screen and (min-width: 320px) and (max-width: 879px) {
