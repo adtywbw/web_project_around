@@ -23,7 +23,6 @@
   top: -40px;
   right: -40px;
   z-index: 2;
-  cursor: pointer;
 }
 
 .popup__close:hover {
