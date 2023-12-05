@@ -1,4 +1,4 @@
-.popup {
+.add {
   visibility: hidden;
   opacity: 0;
   transition: visibiltiy 0s, opacity 0.3s ease;
@@ -10,12 +10,24 @@
   z-index: 2;
   background-color: rgba(0, 0, 0, 0.5);
 }
-.popup_opened {
+.add_opened {
   visibility: visible;
   opacity: 1;
 }
 
-.popup__close {
+.add__container {
+  width: 430px;
+  min-height: 330px;
+  margin: 195px auto 0;
+  padding: 34px 36px 0;
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.add__close {
   background: url("../images/close-button.png");
   background-size: cover;
   border: none;
@@ -28,32 +40,19 @@
   z-index: 2;
 }
 
-.popup__close:hover {
+.add__close:hover {
   opacity: 60%;
   transition: opacity 0.2s ease;
 }
 
-.popup__container {
-  width: 430px;
-  min-height: 330px;
-  margin: 195px auto 0;
-  padding: 34px 36px 0;
-  border-radius: 10px;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
-  box-sizing: border-box;
-  background-color: #fff;
-  position: relative;
-}
-
-.popup__title {
+.add__title {
   margin: 0 0 54px;
   font-size: 24px;
   font-weight: 900;
   line-height: 29px;
 }
 
-.popup__item {
-  margin: 0 0 29.74px;
+.add__item {
   width: 358px;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
@@ -63,8 +62,30 @@
   line-height: 16.94px;
 }
 
-.popup__button {
-  margin: 29px 0 0;
+.add__item_red-border {
+  border-bottom: 1px solid red;
+}
+
+.add__item_url {
+  position: absolute;
+  bottom: 135px;
+}
+
+.add__error {
+  margin-top: 5px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.5px;
+  color: red;
+  display: block;
+}
+
+.add__error_url {
+  position: absolute;
+  bottom: 115px;
+}
+
+.add__button {
   width: 358px;
   height: 50.15px;
   border: none;
@@ -72,39 +93,45 @@
   cursor: pointer;
   background-color: #000;
   color: #fff;
+  position: absolute;
+  bottom: 36px;
+  transition: background-color 0.3s;
 }
 
-.popup__button:hover {
-  opacity: 0.8;
-  transition: opacity 0.2s ease;
+.add__button_disabled {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  opacity: 0.3;
+  cursor: default;
 }
 
 @media screen and (min-width: 320px) and (max-width: 879px) {
-  .popup__container {
+  .add__container {
     width: 282px;
     height: 322px;
     margin: 123px auto 0;
     padding: 25px 22px 0;
   }
 
-  .popup__close {
+  .add__close {
     width: 26px;
     height: 26px;
     right: 0;
   }
 
-  .popup__title {
+  .add__title {
     margin: 0 0 76px;
     font-size: 18px;
     font-weight: 21.7px;
   }
 
-  .popup__item {
+  .add__item {
     margin: 0 0 30px;
     width: 238px;
   }
 
-  .popup__button {
+  .add__button {
     margin: 20px 0 0;
     width: 238px;
   }

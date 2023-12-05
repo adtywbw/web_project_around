@@ -55,73 +55,58 @@
           </form>
         </div>
       </div>
+
+      <div class="add">
+        <div class="add__container">
+          <button class="add__close" type="button"></button>
+          <h3 class="add__title">Tempat baru</h3>
+          <form id="addForm">
+            <input
+              class="add__item add__item_title"
+              type="text"
+              name="name"
+              placeholder="Judul"
+              required
+            />
+            <span class="add__error add__error_title"></span>
+            <input
+              class="add__item add__item_url"
+              type="text"
+              name="url"
+              placeholder="URL Gambar"
+              required
+            />
+            <span class="add__error add__error_url"></span>
+            <button
+              class="add__button add__button_disabled"
+              type="submit"
+              disabled
+            >
+              Simpan
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="photo">
+        <div class="photo__container">
+          <button class="photo__close" type="button"></button>
+          <img class="photo__picture" alt="a photo" />
+          <p class="photo__name"></p>
+        </div>
+      </div>
+
       <section class="gallery">
-        <div class="gallery__item">
-          <img
-            class="gallery__picture"
-            src="./images/Antelope-Canyon.jpg"
-            alt="antelope canyon"
-          />
-          <div class="gallery__tagname">
-            <p class="gallery__name">Antelope Canyon</p>
-            <button class="gallery__love" type="button"></button>
+        <template id="galleryItemTemplate">
+          <div class="gallery__item">
+            <button class="gallery__delete"></button>
+            <img class="gallery__picture" alt="gallery's picture" />
+            <div class="gallery__tagname">
+              <p class="gallery__name"></p>
+              <button class="gallery__love" type="button"></button>
+            </div>
           </div>
-        </div>
-        <div class="gallery__item">
-          <img
-            class="gallery__picture"
-            src="./images/Carlsbad-Cavern.jpg"
-            alt="Carlsbad Cavern"
-          />
-          <div class="gallery__tagname">
-            <p class="gallery__name">Carlsbad Cavern</p>
-            <button class="gallery__love" type="button"></button>
-          </div>
-        </div>
-        <div class="gallery__item">
-          <img
-            class="gallery__picture"
-            src="./images/Mount-Rushmore.jpg"
-            alt="Mount Rushmore"
-          />
-          <div class="gallery__tagname">
-            <p class="gallery__name">Mount Rushmore</p>
-            <button class="gallery__love" type="button"></button>
-          </div>
-        </div>
-        <div class="gallery__item">
-          <img
-            class="gallery__picture"
-            src="./images/Niagara-Falls.jpg"
-            alt="Niagara Falls"
-          />
-          <div class="gallery__tagname">
-            <p class="gallery__name">Niagara Falls</p>
-            <button class="gallery__love" type="button"></button>
-          </div>
-        </div>
-        <div class="gallery__item">
-          <img
-            class="gallery__picture"
-            src="./images/Waikiki_Beach.jpg"
-            alt="Waikiki Beach"
-          />
-          <div class="gallery__tagname">
-            <p class="gallery__name">Waikiki Beach</p>
-            <button class="gallery__love" type="button"></button>
-          </div>
-        </div>
-        <div class="gallery__item">
-          <img
-            class="gallery__picture"
-            src="./images/Yosemite-National-Park.jpg"
-            alt="Yosemite National Park"
-          />
-          <div class="gallery__tagname">
-            <p class="gallery__name">Yosemite National Park</p>
-            <button class="gallery__love" type="button"></button>
-          </div>
-        </div>
+        </template>
       </section>
     </main>
 
