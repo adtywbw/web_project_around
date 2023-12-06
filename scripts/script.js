@@ -1,19 +1,19 @@
 const content = document.querySelector(".content");
 const editButton = content.querySelector(".profile__button_edit");
 const addButton = content.querySelector(".profile__button_add");
-let profileName = content.querySelector(".profile__name");
-let profileOccupation = content.querySelector(".profile__occupation");
+const profileName = content.querySelector(".profile__name");
+const profileOccupation = content.querySelector(".profile__occupation");
 const popup = document.querySelector(".popup");
-let closeButton = popup.querySelector(".popup__close");
+const closeButton = popup.querySelector(".popup__close");
 const form = popup.querySelector("#popupForm");
-let profileNameInput = popup.querySelector(".popup__item_name");
-let profileOccupationInput = popup.querySelector(".popup__item_occupation");
-let add = document.querySelector(".add");
-let addForm = add.querySelector("#addForm");
-let addTitle = add.querySelector(".add__item_title");
-let addUrl = add.querySelector(".add__item_url");
-let addSubmit = add.querySelector(".add__button");
-let addClose = add.querySelector(".add__close");
+const profileNameInput = popup.querySelector(".popup__item_name");
+const profileOccupationInput = popup.querySelector(".popup__item_occupation");
+const add = document.querySelector(".add");
+const addForm = add.querySelector("#addForm");
+const addTitle = add.querySelector(".add__item_title");
+const addUrl = add.querySelector(".add__item_url");
+const addSubmit = add.querySelector(".add__button");
+const addClose = add.querySelector(".add__close");
 const gallery = document.querySelector(".gallery");
 
 const initialCards = [
@@ -44,37 +44,37 @@ const initialCards = [
 ];
 
 // GALLERY INTIAL CARD FUNCTION
-let gridItemTemplate = gallery.querySelector("#galleryItemTemplate");
+const gridItemTemplate = gallery.querySelector("#galleryItemTemplate");
 // clone elemen template
 initialCards.forEach(function (item) {
-  let clone = document.importNode(gridItemTemplate.content, true);
+  const clone = document.importNode(gridItemTemplate.content, true);
   // set nama dan gambar item pada elemen clone
   clone.querySelector(".gallery__name").textContent = item.name;
   clone.querySelector(".gallery__picture").src = item.link;
   // set tombol like
-  let likeButton = clone.querySelectorAll(".gallery__love");
+  const likeButton = clone.querySelectorAll(".gallery__love");
   likeButton.forEach(function (button) {
     button.addEventListener("click", function () {
       button.classList.toggle("gallery__love_fill");
     });
   });
   //set tombol delete
-  let deleteButton = clone.querySelector(".gallery__delete");
-  let galleryItem = clone.querySelector(".gallery__item");
+  const deleteButton = clone.querySelector(".gallery__delete");
+  const galleryItem = clone.querySelector(".gallery__item");
   deleteButton.addEventListener("click", function () {
     galleryItem.remove();
   });
 
   // set tombol foto
-  let photoButton = clone.querySelector(".gallery__picture");
+  const photoButton = clone.querySelector(".gallery__picture");
   photoButton.addEventListener("click", function () {
     popupPhoto(item.name, item.link);
   });
 
   // PHOTO FUNCTION
-  let photoContainer = document.querySelector(".photo");
-  let photoPicture = photoContainer.querySelector(".photo__picture");
-  let photoName = photoContainer.querySelector(".photo__name");
+  const photoContainer = document.querySelector(".photo");
+  const photoPicture = photoContainer.querySelector(".photo__picture");
+  const photoName = photoContainer.querySelector(".photo__name");
   // set photo dan nama
   function popupPhoto(pictureName, pictureLink) {
     photoPicture.src = pictureLink;
@@ -82,7 +82,7 @@ initialCards.forEach(function (item) {
     photoContainer.classList.add("photo__opened");
   }
   // set tombol close foto
-  let closePhoto = photoContainer.querySelector(".photo__close");
+  const closePhoto = photoContainer.querySelector(".photo__close");
   closePhoto.addEventListener("click", function () {
     photoContainer.classList.remove("photo__opened");
   });
@@ -95,8 +95,8 @@ initialCards.forEach(function (item) {
 editButton.addEventListener("click", function () {
   popup.classList.add("popup_opened");
   // mengambil nama
-  let ambilNama = profileName.textContent;
-  let ambilOccupation = profileOccupation.textContent;
+  const ambilNama = profileName.textContent;
+  const ambilOccupation = profileOccupation.textContent;
   profileNameInput.value = ambilNama;
   profileOccupationInput.value = ambilOccupation;
 });
@@ -104,8 +104,8 @@ editButton.addEventListener("click", function () {
 form.addEventListener("submit", function (event) {
   event.preventDefault(); // Mencegah pengiriman formulir
   //menyimpan nama
-  let saveNama = profileNameInput.value;
-  let saveOccupation = profileOccupationInput.value;
+  const saveNama = profileNameInput.value;
+  const saveOccupation = profileOccupationInput.value;
   profileName.textContent = saveNama;
   profileOccupation.textContent = saveOccupation;
   popup.classList.remove("popup_opened");
@@ -126,11 +126,11 @@ addButton.addEventListener("click", function () {
 
   function validateForm() {
     // trim spasi yang ada di input title dan url
-    let titleValue = addTitle.value.trim();
-    let urlValue = addUrl.value.trim();
+    const titleValue = addTitle.value.trim();
+    const urlValue = addUrl.value.trim();
 
     // validasi judul
-    let titleError = add.querySelector(".add__error_title");
+    const titleError = add.querySelector(".add__error_title");
     titleError.textContent = "";
     if (titleValue === "") {
       titleError.textContent = "Silahkan isi kolom ini.";
@@ -141,9 +141,9 @@ addButton.addEventListener("click", function () {
     }
 
     // validasi url
-    let urlError = add.querySelector(".add__error_url");
+    const urlError = add.querySelector(".add__error_url");
     urlError.textContent = "";
-    let urlPattern = /^(ftp|http|https):\/\/[^ "]+$/;
+    const urlPattern = /^(ftp|http|https):\/\/[^ "]+$/;
     if (!urlPattern.test(urlValue)) {
       urlError.textContent = "Silahkan masukan alamat web.";
       addUrl.classList.add("add__item_red-border");
@@ -181,36 +181,36 @@ addClose.addEventListener("click", function () {
 // ADD ITEM FUNTION
 addForm.addEventListener("submit", function (event) {
   event.preventDefault(); // Mencegah pengiriman formulir
-  let titleValue = addTitle.value.trim();
-  let urlValue = addUrl.value.trim();
-  let clone = document.importNode(gridItemTemplate.content, true);
+  const titleValue = addTitle.value.trim();
+  const urlValue = addUrl.value.trim();
+  const clone = document.importNode(gridItemTemplate.content, true);
   // set judul dan gambar ke elemen clone
   clone.querySelector(".gallery__name").textContent = titleValue;
   clone.querySelector(".gallery__picture").src = urlValue;
   // set tombol like
-  let likeButton = clone.querySelectorAll(".gallery__love");
+  const likeButton = clone.querySelectorAll(".gallery__love");
   likeButton.forEach(function (button) {
     button.addEventListener("click", function () {
       button.classList.toggle("gallery__love_fill");
     });
   });
   //set tombol delete
-  let deleteButton = clone.querySelector(".gallery__delete");
-  let galleryItem = clone.querySelector(".gallery__item");
+  const deleteButton = clone.querySelector(".gallery__delete");
+  const galleryItem = clone.querySelector(".gallery__item");
   deleteButton.addEventListener("click", function () {
     galleryItem.remove();
   });
 
   // set tombol foto
-  let photoButton = clone.querySelector(".gallery__picture");
+  const photoButton = clone.querySelector(".gallery__picture");
   photoButton.addEventListener("click", function () {
     popupPhoto(titleValue, urlValue);
   });
 
   // PHOTO FUNCTION
-  let photoContainer = document.querySelector(".photo");
-  let photoPicture = photoContainer.querySelector(".photo__picture");
-  let photoName = photoContainer.querySelector(".photo__name");
+  const photoContainer = document.querySelector(".photo");
+  const photoPicture = photoContainer.querySelector(".photo__picture");
+  const photoName = photoContainer.querySelector(".photo__name");
   // set photo dan nama
   function popupPhoto(pictureName, pictureLink) {
     photoPicture.src = pictureLink;
@@ -218,7 +218,7 @@ addForm.addEventListener("submit", function (event) {
     photoContainer.classList.add("photo__opened");
   }
   // set tombol close foto
-  let closePhoto = photoContainer.querySelector(".photo__close");
+  const closePhoto = photoContainer.querySelector(".photo__close");
   closePhoto.addEventListener("click", function () {
     photoContainer.classList.remove("photo__opened");
   });
