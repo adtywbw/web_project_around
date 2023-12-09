@@ -45,12 +45,20 @@
               class="popup__item popup__item_name"
               type="text"
               name="username"
+              required
+              minlength="5"
+              maxlength="40"
             />
+            <span class="popup__error popup__error_name"></span>
             <input
               class="popup__item popup__item_occupation"
               type="text"
-              name="occupation"
+              name="job"
+              required
+              minlength="5"
+              maxlength="40"
             />
+            <span class="popup__error popup__error_occupation"></span>
             <button class="popup__button" type="submit">Simpan</button>
           </form>
         </div>
@@ -67,6 +75,8 @@
               name="name"
               placeholder="Judul"
               required
+              minlength="2"
+              maxlength="30"
             />
             <span class="add__error add__error_title"></span>
             <input

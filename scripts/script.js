@@ -1,21 +1,31 @@
 const content = document.querySelector(".content");
+
 const editButton = content.querySelector(".profile__button_edit");
 const addButton = content.querySelector(".profile__button_add");
 const profileName = content.querySelector(".profile__name");
 const profileOccupation = content.querySelector(".profile__occupation");
+
 const popup = document.querySelector(".popup");
+const popupContainer = popup.querySelector(".popup__container");
 const closeButton = popup.querySelector(".popup__close");
 const form = popup.querySelector("#popupForm");
 const profileNameInput = popup.querySelector(".popup__item_name");
 const profileOccupationInput = popup.querySelector(".popup__item_occupation");
+const profileNameError = popup.querySelector(".popup__error_name");
+const profileOccupationError = popup.querySelector(".popup__error_occupation");
+const profileSubmit = popup.querySelector(".popup__button");
+
 const add = document.querySelector(".add");
+const addContainer = add.querySelector(".add__container");
 const addForm = add.querySelector("#addForm");
 const addTitle = add.querySelector(".add__item_title");
+const titleError = add.querySelector(".add__error_title");
+const urlError = add.querySelector(".add__error_url");
 const addUrl = add.querySelector(".add__item_url");
 const addSubmit = add.querySelector(".add__button");
 const addClose = add.querySelector(".add__close");
-const gallery = document.querySelector(".gallery");
 
+const gallery = document.querySelector(".gallery");
 const initialCards = [
   {
     name: "Lembah Yosemite",
@@ -92,6 +102,7 @@ initialCards.forEach(function (item) {
 });
 
 // EDIT PROFILE BUTTON FUNCTION
+// listener tombol edit
 editButton.addEventListener("click", function () {
   popup.classList.add("popup_opened");
   // mengambil nama
@@ -99,8 +110,53 @@ editButton.addEventListener("click", function () {
   const ambilOccupation = profileOccupation.textContent;
   profileNameInput.value = ambilNama;
   profileOccupationInput.value = ambilOccupation;
+  // menambah fungsi validasi
+  profileNameInput.addEventListener("input", validateProfile);
+  profileOccupationInput.addEventListener("input", validateProfile);
+  // validasi profile
+  function validateProfile() {
+    // ambil nilai nama dan occupation
+    const nameValue = profileNameInput.value;
+    const occupationValue = profileOccupationInput.value;
+    // validasi nama
+    if (nameValue.length === 0) {
+      profileNameError.textContent = "Silahkan isi kolom ini.";
+      profileNameInput.classList.add("popup__item_red-border");
+    } else if (nameValue.length < 5 || nameValue.length > 40) {
+      profileNameError.textContent = `Harap perpanjang ini menjadi 5 karakter atau lebih. Anda saat ini menggunakan ${nameValue.length} karakter`;
+      profileNameInput.classList.add("popup__item_red-border");
+    } else {
+      profileNameError.textContent = "";
+      profileNameInput.classList.remove("popup__item_red-border");
+    }
+    // validasi occupation
+    if (occupationValue.length === 0) {
+      profileOccupationError.textContent = "Silahkan isi kolom ini.";
+      profileOccupationInput.classList.add("popup__item_red-border");
+    } else if (occupationValue.length < 5 || occupationValue.length > 40) {
+      profileOccupationError.textContent = `Harap perpanjang ini menjadi 5 karakter atau lebih. Anda saat ini menggunakan ${occupationValue.length} karakter`;
+      profileOccupationInput.classList.add("popup__item_red-border");
+    } else {
+      profileOccupationError.textContent = "";
+      profileOccupationInput.classList.remove("popup__item_red-border");
+    }
+    // disable tombol simpan jika validasi salah
+    if (
+      nameValue.length < 5 ||
+      nameValue > 40 ||
+      occupationValue.length < 5 ||
+      occupationValue > 40
+    ) {
+      profileSubmit.disabled = true;
+      profileSubmit.classList.add("popup__button_disabled");
+    } else {
+      profileSubmit.disabled = false;
+      profileSubmit.classList.remove("popup__button_disabled");
+    }
+  }
 });
 
+// TOMBOL SIMPAN EDIT BUTTON
 form.addEventListener("submit", function (event) {
   event.preventDefault(); // Mencegah pengiriman formulir
   //menyimpan nama
@@ -113,10 +169,36 @@ form.addEventListener("submit", function (event) {
 
 // CLOSE BUTTON FUNCTION FOR EDIT BUTTON
 closeButton.addEventListener("click", function () {
+  profileNameError.textContent = "";
+  profileOccupationError.textContent = "";
+  profileNameInput.classList.remove("popup__item_red-border");
+  profileOccupationInput.classList.remove("popup__item_red-border");
   popup.classList.remove("popup_opened");
 });
 
-// ADD BUTTON VALIDATIO FUNCTION
+// OVERLAY CLOSE FOR EDIT BUTTON
+popup.addEventListener("click", function (event) {
+  if (!popupContainer.contains(event.target)) {
+    profileNameError.textContent = "";
+    profileOccupationError.textContent = "";
+    profileNameInput.classList.remove("popup__item_red-border");
+    profileOccupationInput.classList.remove("popup__item_red-border");
+    popup.classList.remove("popup_opened");
+  }
+});
+
+// "ESC" CLOSE FOR EDIT BUTTON
+editButton.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    profileNameError.textContent = "";
+    profileOccupationError.textContent = "";
+    profileNameInput.classList.remove("popup__item_red-border");
+    profileOccupationInput.classList.remove("popup__item_red-border");
+    popup.classList.remove("popup_opened");
+  }
+});
+
+// ADD BUTTON VALIDATION FUNCTION
 addButton.addEventListener("click", function () {
   add.classList.add("add_opened");
 
@@ -130,10 +212,12 @@ addButton.addEventListener("click", function () {
     const urlValue = addUrl.value.trim();
 
     // validasi judul
-    const titleError = add.querySelector(".add__error_title");
     titleError.textContent = "";
     if (titleValue === "") {
       titleError.textContent = "Silahkan isi kolom ini.";
+      addTitle.classList.add("add__item_red-border");
+    } else if (titleValue.length < 2 || titleValue.length > 30) {
+      titleError.textContent = `Harap perpanjang ini menjadi 2 karakter atau lebih. Anda saat ini menggunakan ${titleValue.length} karakter`;
       addTitle.classList.add("add__item_red-border");
     } else {
       titleError.textContent = "";
@@ -141,7 +225,6 @@ addButton.addEventListener("click", function () {
     }
 
     // validasi url
-    const urlError = add.querySelector(".add__error_url");
     urlError.textContent = "";
     const urlPattern = /^(ftp|http|https):\/\/[^ "]+$/;
     if (!urlPattern.test(urlValue)) {
@@ -152,30 +235,52 @@ addButton.addEventListener("click", function () {
       addUrl.classList.remove("add__item_red-border");
     }
 
-    // aktifkan/tidak tombol simpan jika validasi benar/salah
+    // disable tombol simpan jika validasi salah
     addSubmit.disabled = titleValue === "" || !urlPattern.test(urlValue);
-
-    // ubah class tombol
-    if (titleValue === "" || !urlPattern.test(urlValue)) {
+    if (
+      (addSubmit.disabled = titleValue === "" || !urlPattern.test(urlValue))
+    ) {
+      addSubmit.disabled = true;
       addSubmit.classList.add("add__button_disabled");
     } else {
+      addSubmit.disabled = false;
       addSubmit.classList.remove("add__button_disabled");
-      addSubmit.style.backgroundColor = "black";
-      addSubmit.addEventListener("mouseover", function () {
-        this.style.backgroundColor = "rgba(0,0,0,0.8";
-      });
-      addSubmit.addEventListener("mouseout", function () {
-        this.style.backgroundColor = "rgba(0,0,0,1";
-      });
     }
   }
 });
 
 // CLOSE BUTTON FUNCTION FOR ADD BUTTON
 addClose.addEventListener("click", function () {
-  addTitle.value = "";
-  addUrl.value = "";
+  addForm.reset();
+  titleError.textContent = "";
+  urlError.textContent = "";
+  addUrl.classList.remove("add__item_red-border");
+  addTitle.classList.remove("add__item_red-border");
   add.classList.remove("add_opened");
+});
+
+// OVERLAY CLOSE FOR ADD BUTTON
+add.addEventListener("click", function (event) {
+  if (!addContainer.contains(event.target)) {
+    addForm.reset();
+    titleError.textContent = "";
+    urlError.textContent = "";
+    addUrl.classList.remove("add__item_red-border");
+    addTitle.classList.remove("add__item_red-border");
+    add.classList.remove("add_opened");
+  }
+});
+
+// "ESC" CLOSE FOR ADD BUTTON
+addButton.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    addForm.reset();
+    titleError.textContent = "";
+    urlError.textContent = "";
+    addUrl.classList.remove("add__item_red-border");
+    addTitle.classList.remove("add__item_red-border");
+    add.classList.remove("add_opened");
+  }
 });
 
 // ADD ITEM FUNTION
@@ -226,8 +331,7 @@ addForm.addEventListener("submit", function (event) {
   // masukan nilai input sebelum item pertama
   gallery.insertBefore(clone, gallery.firstChild);
   // Reset nilai input
-  addTitle.value = "";
-  addUrl.value = "";
+  addForm.reset();
   // close form input
   add.classList.remove("add_opened");
 });

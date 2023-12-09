@@ -98,6 +98,11 @@
   transition: background-color 0.3s;
 }
 
+.add__button:valid:hover {
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
 .add__button_disabled {
   background-color: #fff;
   color: #000;
