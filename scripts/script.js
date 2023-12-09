@@ -25,6 +25,11 @@ const addUrl = add.querySelector(".add__item_url");
 const addSubmit = add.querySelector(".add__button");
 const addClose = add.querySelector(".add__close");
 
+const photo = document.querySelector(".photo");
+const photoContainer = photo.querySelector(".photo__container");
+const photoPicture = photo.querySelector(".photo__picture");
+const photoName = photo.querySelector(".photo__name");
+
 const gallery = document.querySelector(".gallery");
 const initialCards = [
   {
@@ -79,22 +84,38 @@ initialCards.forEach(function (item) {
   const photoButton = clone.querySelector(".gallery__picture");
   photoButton.addEventListener("click", function () {
     popupPhoto(item.name, item.link);
+    // set focus pada foto agar foto bisa meneriman event keydown
+    photoPicture.focus();
+    // menghilangkan efek focus
+    photoPicture.style.outline = "none";
+    // set tombol esc untuk close foto
+    photoPicture.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        photo.classList.remove("photo__opened");
+      }
+    });
   });
 
   // PHOTO FUNCTION
-  const photoContainer = document.querySelector(".photo");
-  const photoPicture = photoContainer.querySelector(".photo__picture");
-  const photoName = photoContainer.querySelector(".photo__name");
+
   // set photo dan nama
   function popupPhoto(pictureName, pictureLink) {
     photoPicture.src = pictureLink;
     photoName.textContent = pictureName;
-    photoContainer.classList.add("photo__opened");
+    photoPicture.setAttribute("tabindex", "0");
+    photo.classList.add("photo__opened");
   }
   // set tombol close foto
-  const closePhoto = photoContainer.querySelector(".photo__close");
+  const closePhoto = photo.querySelector(".photo__close");
   closePhoto.addEventListener("click", function () {
-    photoContainer.classList.remove("photo__opened");
+    photo.classList.remove("photo__opened");
+  });
+
+  // set overlay untuk close foto
+  photo.addEventListener("click", function (event) {
+    if (!photoContainer.contains(event.target)) {
+      photo.classList.remove("photo__opened");
+    }
   });
 
   // masukan clone ke elemen gallery
@@ -310,22 +331,36 @@ addForm.addEventListener("submit", function (event) {
   const photoButton = clone.querySelector(".gallery__picture");
   photoButton.addEventListener("click", function () {
     popupPhoto(titleValue, urlValue);
+    // set focus pada foto agar foto bisa meneriman event keydown
+    photoPicture.focus();
+    // menghilangkan efek focus
+    photoPicture.style.outline = "none";
+    photoPicture.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        photo.classList.remove("photo__opened");
+      }
+    });
   });
 
   // PHOTO FUNCTION
-  const photoContainer = document.querySelector(".photo");
-  const photoPicture = photoContainer.querySelector(".photo__picture");
-  const photoName = photoContainer.querySelector(".photo__name");
   // set photo dan nama
   function popupPhoto(pictureName, pictureLink) {
     photoPicture.src = pictureLink;
     photoName.textContent = pictureName;
-    photoContainer.classList.add("photo__opened");
+    photoPicture.setAttribute("tabindex", "0");
+    photo.classList.add("photo__opened");
   }
   // set tombol close foto
-  const closePhoto = photoContainer.querySelector(".photo__close");
+  const closePhoto = photo.querySelector(".photo__close");
   closePhoto.addEventListener("click", function () {
-    photoContainer.classList.remove("photo__opened");
+    photo.classList.remove("photo__opened");
+  });
+
+  // set overlay untuk close foto
+  photo.addEventListener("click", function (event) {
+    if (!photoContainer.contains(event.target)) {
+      photo.classList.remove("photo__opened");
+    }
   });
 
   // masukan nilai input sebelum item pertama
