@@ -8,21 +8,25 @@ const profileOccupation = content.querySelector(".profile__occupation");
 const popup = document.querySelector(".popup");
 const popupContainer = popup.querySelector(".popup__container");
 const closeButton = popup.querySelector(".popup__close");
-const form = popup.querySelector("#popupForm");
-const profileNameInput = popup.querySelector(".popup__item_name");
-const profileOccupationInput = popup.querySelector(".popup__item_occupation");
-const profileNameError = popup.querySelector(".popup__error_name");
-const profileOccupationError = popup.querySelector(".popup__error_occupation");
-const profileSubmit = popup.querySelector(".popup__button");
+const popupForm = popup.querySelector("#popupForm");
+export const profileNameInput = popup.querySelector(".popup__item_name");
+export const profileOccupationInput = popup.querySelector(
+  ".popup__item_occupation"
+);
+export const profileNameError = popup.querySelector(".popup__error_name");
+export const profileOccupationError = popup.querySelector(
+  ".popup__error_occupation"
+);
+export const profileSubmit = popup.querySelector(".popup__button");
 
 const add = document.querySelector(".add");
+export const addTitle = add.querySelector(".add__item_title");
+export const addUrl = add.querySelector(".add__item_url");
+export const titleError = add.querySelector(".add__error_title");
+export const urlError = add.querySelector(".add__error_url");
+export const addSubmit = add.querySelector(".add__button");
 const addContainer = add.querySelector(".add__container");
 const addForm = add.querySelector("#addForm");
-const addTitle = add.querySelector(".add__item_title");
-const titleError = add.querySelector(".add__error_title");
-const urlError = add.querySelector(".add__error_url");
-const addUrl = add.querySelector(".add__item_url");
-const addSubmit = add.querySelector(".add__button");
 const addClose = add.querySelector(".add__close");
 
 const photo = document.querySelector(".photo");
@@ -60,35 +64,35 @@ const initialCards = [
 
 // GALLERY INTIAL CARD FUNCTION
 const gridItemTemplate = gallery.querySelector("#galleryItemTemplate");
-// clone elemen template
+
 initialCards.forEach(function (item) {
+  // clone elemen template
   const clone = document.importNode(gridItemTemplate.content, true);
-  // set nama dan gambar item pada elemen clone
+  // copy tiap nama dan gambar dari objek initial card ke elemen clone
   clone.querySelector(".gallery__name").textContent = item.name;
   clone.querySelector(".gallery__picture").src = item.link;
-  // set tombol like
+  // memberi event click ke tombol like tiap item gallery
   const likeButton = clone.querySelectorAll(".gallery__love");
   likeButton.forEach(function (button) {
     button.addEventListener("click", function () {
       button.classList.toggle("gallery__love_fill");
     });
   });
-  //set tombol delete
+  // memberi event click ke tombol delete pada item gallery
   const deleteButton = clone.querySelector(".gallery__delete");
   const galleryItem = clone.querySelector(".gallery__item");
   deleteButton.addEventListener("click", function () {
     galleryItem.remove();
   });
-
-  // set tombol foto
+  // memberi event click ke picture pada item gallery agar dapat di zoom
   const photoButton = clone.querySelector(".gallery__picture");
   photoButton.addEventListener("click", function () {
     popupPhoto(item.name, item.link);
-    // set focus pada foto agar foto bisa meneriman event keydown
+    // memberi focus pada foto agar foto bisa menerima event keydown
     photoPicture.focus();
-    // menghilangkan efek focus
+    // menghilangkan efek focus (muncul outline)
     photoPicture.style.outline = "none";
-    // set tombol esc untuk close foto
+    // memberi event keydown tombol esc untuk menutup foto yang telah di zoom
     photoPicture.addEventListener("keydown", function (event) {
       if (event.key === "Escape") {
         photo.classList.remove("photo__opened");
@@ -96,22 +100,20 @@ initialCards.forEach(function (item) {
     });
   });
 
-  // PHOTO FUNCTION
-
-  // set photo dan nama
+  // fungsi untuk zoom picture pada item gallery
   function popupPhoto(pictureName, pictureLink) {
     photoPicture.src = pictureLink;
     photoName.textContent = pictureName;
     photoPicture.setAttribute("tabindex", "0");
     photo.classList.add("photo__opened");
   }
-  // set tombol close foto
+  // memberi event click ke tombol close saat item gallery di zoom
   const closePhoto = photo.querySelector(".photo__close");
   closePhoto.addEventListener("click", function () {
     photo.classList.remove("photo__opened");
   });
 
-  // set overlay untuk close foto
+  // memberi event click ke overlay saat item gallery di zoom
   photo.addEventListener("click", function (event) {
     if (!photoContainer.contains(event.target)) {
       photo.classList.remove("photo__opened");
@@ -122,65 +124,27 @@ initialCards.forEach(function (item) {
   gallery.appendChild(clone);
 });
 
-// EDIT PROFILE BUTTON FUNCTION
-// listener tombol edit
+// PROFILE'S EDIT BUTTON FUNCTION
+// mengambil fungsi validasi profile dari validate.js
+import { validateProfile } from "./validate.js";
+// listener click tombol edit
 editButton.addEventListener("click", function () {
   popup.classList.add("popup_opened");
-  // mengambil nama
+  // mengambil nama dan occupation prfoile
   const ambilNama = profileName.textContent;
   const ambilOccupation = profileOccupation.textContent;
   profileNameInput.value = ambilNama;
   profileOccupationInput.value = ambilOccupation;
+
   // menambah fungsi validasi
   profileNameInput.addEventListener("input", validateProfile);
   profileOccupationInput.addEventListener("input", validateProfile);
-  // validasi profile
-  function validateProfile() {
-    // ambil nilai nama dan occupation
-    const nameValue = profileNameInput.value;
-    const occupationValue = profileOccupationInput.value;
-    // validasi nama
-    if (nameValue.length === 0) {
-      profileNameError.textContent = "Silahkan isi kolom ini.";
-      profileNameInput.classList.add("popup__item_red-border");
-    } else if (nameValue.length < 5 || nameValue.length > 40) {
-      profileNameError.textContent = `Harap perpanjang ini menjadi 5 karakter atau lebih. Anda saat ini menggunakan ${nameValue.length} karakter`;
-      profileNameInput.classList.add("popup__item_red-border");
-    } else {
-      profileNameError.textContent = "";
-      profileNameInput.classList.remove("popup__item_red-border");
-    }
-    // validasi occupation
-    if (occupationValue.length === 0) {
-      profileOccupationError.textContent = "Silahkan isi kolom ini.";
-      profileOccupationInput.classList.add("popup__item_red-border");
-    } else if (occupationValue.length < 5 || occupationValue.length > 40) {
-      profileOccupationError.textContent = `Harap perpanjang ini menjadi 5 karakter atau lebih. Anda saat ini menggunakan ${occupationValue.length} karakter`;
-      profileOccupationInput.classList.add("popup__item_red-border");
-    } else {
-      profileOccupationError.textContent = "";
-      profileOccupationInput.classList.remove("popup__item_red-border");
-    }
-    // disable tombol simpan jika validasi salah
-    if (
-      nameValue.length < 5 ||
-      nameValue > 40 ||
-      occupationValue.length < 5 ||
-      occupationValue > 40
-    ) {
-      profileSubmit.disabled = true;
-      profileSubmit.classList.add("popup__button_disabled");
-    } else {
-      profileSubmit.disabled = false;
-      profileSubmit.classList.remove("popup__button_disabled");
-    }
-  }
 });
 
-// TOMBOL SIMPAN EDIT BUTTON
-form.addEventListener("submit", function (event) {
+// PROFILE'S SAVE BUTTON FUNCTION
+popupForm.addEventListener("submit", function (event) {
   event.preventDefault(); // Mencegah pengiriman formulir
-  //menyimpan nama
+  // menyimpan nama profile dari form profile
   const saveNama = profileNameInput.value;
   const saveOccupation = profileOccupationInput.value;
   profileName.textContent = saveNama;
@@ -188,7 +152,7 @@ form.addEventListener("submit", function (event) {
   popup.classList.remove("popup_opened");
 });
 
-// CLOSE BUTTON FUNCTION FOR EDIT BUTTON
+// PROFILE'S CLOSE BUTTON FUNCTION
 closeButton.addEventListener("click", function () {
   profileNameError.textContent = "";
   profileOccupationError.textContent = "";
@@ -197,8 +161,8 @@ closeButton.addEventListener("click", function () {
   popup.classList.remove("popup_opened");
 });
 
-// OVERLAY CLOSE FOR EDIT BUTTON
-popup.addEventListener("click", function (event) {
+// PROFILE'S OVERLAY CLOSE FUNCTION
+popup.addEventListener("mousedown", function (event) {
   if (!popupContainer.contains(event.target)) {
     profileNameError.textContent = "";
     profileOccupationError.textContent = "";
@@ -208,7 +172,7 @@ popup.addEventListener("click", function (event) {
   }
 });
 
-// "ESC" CLOSE FOR EDIT BUTTON
+// PROFILE'S "ESC" CLOSE BUTTON FUNCTION
 editButton.addEventListener("keydown", function (event) {
   if (event.key === "Escape") {
     profileNameError.textContent = "";
@@ -219,58 +183,19 @@ editButton.addEventListener("keydown", function (event) {
   }
 });
 
-// ADD BUTTON VALIDATION FUNCTION
+// ADD'S BUTTON VALIDATION FUNCTION
+// mengimport fungsi validasi dari validate.js
+import { validateForm } from "./validate.js";
+// memberi event click pada tombol add
 addButton.addEventListener("click", function () {
   add.classList.add("add_opened");
 
-  // menambah fungsi validasi
+  // menambah fungsi validasi saat input dimasukan
   addTitle.addEventListener("input", validateForm);
   addUrl.addEventListener("input", validateForm);
-
-  function validateForm() {
-    // trim spasi yang ada di input title dan url
-    const titleValue = addTitle.value.trim();
-    const urlValue = addUrl.value.trim();
-
-    // validasi judul
-    titleError.textContent = "";
-    if (titleValue === "") {
-      titleError.textContent = "Silahkan isi kolom ini.";
-      addTitle.classList.add("add__item_red-border");
-    } else if (titleValue.length < 2 || titleValue.length > 30) {
-      titleError.textContent = `Harap perpanjang ini menjadi 2 karakter atau lebih. Anda saat ini menggunakan ${titleValue.length} karakter`;
-      addTitle.classList.add("add__item_red-border");
-    } else {
-      titleError.textContent = "";
-      addTitle.classList.remove("add__item_red-border");
-    }
-
-    // validasi url
-    urlError.textContent = "";
-    const urlPattern = /^(ftp|http|https):\/\/[^ "]+$/;
-    if (!urlPattern.test(urlValue)) {
-      urlError.textContent = "Silahkan masukan alamat web.";
-      addUrl.classList.add("add__item_red-border");
-    } else {
-      urlError.textContent = "";
-      addUrl.classList.remove("add__item_red-border");
-    }
-
-    // disable tombol simpan jika validasi salah
-    addSubmit.disabled = titleValue === "" || !urlPattern.test(urlValue);
-    if (
-      (addSubmit.disabled = titleValue === "" || !urlPattern.test(urlValue))
-    ) {
-      addSubmit.disabled = true;
-      addSubmit.classList.add("add__button_disabled");
-    } else {
-      addSubmit.disabled = false;
-      addSubmit.classList.remove("add__button_disabled");
-    }
-  }
 });
 
-// CLOSE BUTTON FUNCTION FOR ADD BUTTON
+// ADD'S BUTTON CLOSE BUTTON FUNCTION
 addClose.addEventListener("click", function () {
   addForm.reset();
   titleError.textContent = "";
@@ -280,8 +205,8 @@ addClose.addEventListener("click", function () {
   add.classList.remove("add_opened");
 });
 
-// OVERLAY CLOSE FOR ADD BUTTON
-add.addEventListener("click", function (event) {
+// ADD'S OVERLAY CLOSE FUNCTION
+add.addEventListener("mousedown", function (event) {
   if (!addContainer.contains(event.target)) {
     addForm.reset();
     titleError.textContent = "";
@@ -292,7 +217,7 @@ add.addEventListener("click", function (event) {
   }
 });
 
-// "ESC" CLOSE FOR ADD BUTTON
+// ADD'S "ESC" CLOSE BUTTON FUNCTION
 addButton.addEventListener("keydown", function (event) {
   if (event.key === "Escape") {
     addForm.reset();
@@ -304,36 +229,37 @@ addButton.addEventListener("keydown", function (event) {
   }
 });
 
-// ADD ITEM FUNTION
+// ADD'S SAVE BUTTON FUNCTION
 addForm.addEventListener("submit", function (event) {
   event.preventDefault(); // Mencegah pengiriman formulir
+  // trim spasi yang ada di input title dan url
   const titleValue = addTitle.value.trim();
   const urlValue = addUrl.value.trim();
   const clone = document.importNode(gridItemTemplate.content, true);
-  // set judul dan gambar ke elemen clone
+  // menyimpan judul dan gambar ke elemen clone
   clone.querySelector(".gallery__name").textContent = titleValue;
   clone.querySelector(".gallery__picture").src = urlValue;
-  // set tombol like
+  // memberi event click ke tombol like ke tiap item gallery yang ditambahkan
   const likeButton = clone.querySelectorAll(".gallery__love");
   likeButton.forEach(function (button) {
     button.addEventListener("click", function () {
       button.classList.toggle("gallery__love_fill");
     });
   });
-  //set tombol delete
+  // memberi event click ke tombol delete ke tiap item gallery yang ditambahkan
   const deleteButton = clone.querySelector(".gallery__delete");
   const galleryItem = clone.querySelector(".gallery__item");
   deleteButton.addEventListener("click", function () {
     galleryItem.remove();
   });
 
-  // set tombol foto
+  // memberi event click ke picture pada item gallery yang ditambahkan agar dapat di zoom
   const photoButton = clone.querySelector(".gallery__picture");
   photoButton.addEventListener("click", function () {
     popupPhoto(titleValue, urlValue);
-    // set focus pada foto agar foto bisa meneriman event keydown
+    // memberi focus pada foto agar foto bisa menerima event keydown
     photoPicture.focus();
-    // menghilangkan efek focus
+    // menghilangkan efek focus (muncul outline)
     photoPicture.style.outline = "none";
     photoPicture.addEventListener("keydown", function (event) {
       if (event.key === "Escape") {
@@ -342,28 +268,27 @@ addForm.addEventListener("submit", function (event) {
     });
   });
 
-  // PHOTO FUNCTION
-  // set photo dan nama
+  // fungsi untuk zoom picture pada item gallery yang ditambahkan
   function popupPhoto(pictureName, pictureLink) {
     photoPicture.src = pictureLink;
     photoName.textContent = pictureName;
     photoPicture.setAttribute("tabindex", "0");
     photo.classList.add("photo__opened");
   }
-  // set tombol close foto
+  // memberi event click ke tombol close saat item gallery yang ditambahkan di zoom
   const closePhoto = photo.querySelector(".photo__close");
   closePhoto.addEventListener("click", function () {
     photo.classList.remove("photo__opened");
   });
 
-  // set overlay untuk close foto
+  // memberi event click ke overlay saat item gallery yang ditambahkan di zoom
   photo.addEventListener("click", function (event) {
     if (!photoContainer.contains(event.target)) {
       photo.classList.remove("photo__opened");
     }
   });
 
-  // masukan nilai input sebelum item pertama
+  // masukan item gallery yang ditambahkan ke posisi sebelum item gallery pertama
   gallery.insertBefore(clone, gallery.firstChild);
   // Reset nilai input
   addForm.reset();

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Around The U.S.</title>
     <link rel="stylesheet" href="./pages/index.css" />
+    <script type="module" src="./scripts/validate.js"></script>
   </head>
   <body class="homepage">
     <header class="header">
@@ -20,7 +21,7 @@
         <img
           class="profile__photo"
           src="./images/profile-photo.png"
-          alt="Jacques Cousteau'photo"
+          alt="avatar"
         />
         <div class="profile__tagname">
           <h1 class="profile__name">Jacques Cousteau</h1>
@@ -46,7 +47,7 @@
               type="text"
               name="username"
               required
-              minlength="5"
+              minlength="2"
               maxlength="40"
             />
             <span class="popup__error popup__error_name"></span>
@@ -55,8 +56,8 @@
               type="text"
               name="job"
               required
-              minlength="5"
-              maxlength="40"
+              minlength="2"
+              maxlength="200"
             />
             <span class="popup__error popup__error_occupation"></span>
             <button class="popup__button" type="submit">Simpan</button>
@@ -123,6 +124,7 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2021 Arount The U.S.</p>
     </footer>
-    <script src="./scripts/script.js"></script>
+    <script type="module" src="./scripts/script.js"></script>
+    <script type="module" src="./scripts/validate.js"></script>
   </body>
 </html>
