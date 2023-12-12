@@ -68,25 +68,24 @@
 
 .popup__item_occupation {
   position: absolute;
-  bottom: 135px;
+  left: 36px;
+  bottom: 132px;
 }
 
 .popup__error {
-  margin-top: 5px;
+  width: 358px;
   font-size: 12px;
   font-weight: 400;
-  line-height: 14.5px;
   color: red;
-  display: block;
 }
 
 .popup__error_occupation {
   position: absolute;
-  bottom: 100px;
+  left: 36px;
+  top: 200px;
 }
 
 .popup__button {
-  margin: 29px 0 0;
   width: 358px;
   height: 50.15px;
   border: none;
@@ -95,7 +94,8 @@
   background-color: #000;
   color: #fff;
   position: absolute;
-  bottom: 36px;
+  left: 36px;
+  bottom: 35px;
 }
 
 .popup__button:valid:hover {

@@ -17,13 +17,14 @@ export const profileNameError = popup.querySelector(".popup__error_name");
 export const profileOccupationError = popup.querySelector(
   ".popup__error_occupation"
 );
+
 export const profileSubmit = popup.querySelector(".popup__button");
 
 const add = document.querySelector(".add");
 export const addTitle = add.querySelector(".add__item_title");
 export const addUrl = add.querySelector(".add__item_url");
-export const titleError = add.querySelector(".add__error_title");
-export const urlError = add.querySelector(".add__error_url");
+export const addErrorTitle = add.querySelector(".add__error_title");
+export const addErrorUrl = add.querySelector(".add__error_url");
 export const addSubmit = add.querySelector(".add__button");
 const addContainer = add.querySelector(".add__container");
 const addForm = add.querySelector("#addForm");
@@ -156,8 +157,6 @@ popupForm.addEventListener("submit", function (event) {
 closeButton.addEventListener("click", function () {
   profileNameError.textContent = "";
   profileOccupationError.textContent = "";
-  profileNameInput.classList.remove("popup__item_red-border");
-  profileOccupationInput.classList.remove("popup__item_red-border");
   popup.classList.remove("popup_opened");
 });
 
@@ -166,8 +165,6 @@ popup.addEventListener("mousedown", function (event) {
   if (!popupContainer.contains(event.target)) {
     profileNameError.textContent = "";
     profileOccupationError.textContent = "";
-    profileNameInput.classList.remove("popup__item_red-border");
-    profileOccupationInput.classList.remove("popup__item_red-border");
     popup.classList.remove("popup_opened");
   }
 });
@@ -177,8 +174,6 @@ editButton.addEventListener("keydown", function (event) {
   if (event.key === "Escape") {
     profileNameError.textContent = "";
     profileOccupationError.textContent = "";
-    profileNameInput.classList.remove("popup__item_red-border");
-    profileOccupationInput.classList.remove("popup__item_red-border");
     popup.classList.remove("popup_opened");
   }
 });
@@ -198,10 +193,11 @@ addButton.addEventListener("click", function () {
 // ADD'S BUTTON CLOSE BUTTON FUNCTION
 addClose.addEventListener("click", function () {
   addForm.reset();
-  titleError.textContent = "";
-  urlError.textContent = "";
-  addUrl.classList.remove("add__item_red-border");
   addTitle.classList.remove("add__item_red-border");
+  addUrl.classList.remove("add__item_red-border");
+  addErrorTitle.textContent = "";
+  addErrorUrl.textContent = "";
+
   add.classList.remove("add_opened");
 });
 
@@ -209,10 +205,10 @@ addClose.addEventListener("click", function () {
 add.addEventListener("mousedown", function (event) {
   if (!addContainer.contains(event.target)) {
     addForm.reset();
-    titleError.textContent = "";
-    urlError.textContent = "";
-    addUrl.classList.remove("add__item_red-border");
     addTitle.classList.remove("add__item_red-border");
+    addUrl.classList.remove("add__item_red-border");
+    addErrorTitle.textContent = "";
+    addErrorUrl.textContent = "";
     add.classList.remove("add_opened");
   }
 });
@@ -221,10 +217,10 @@ add.addEventListener("mousedown", function (event) {
 addButton.addEventListener("keydown", function (event) {
   if (event.key === "Escape") {
     addForm.reset();
-    titleError.textContent = "";
-    urlError.textContent = "";
-    addUrl.classList.remove("add__item_red-border");
     addTitle.classList.remove("add__item_red-border");
+    addUrl.classList.remove("add__item_red-border");
+    addErrorTitle.textContent = "";
+    addErrorUrl.textContent = "";
     add.classList.remove("add_opened");
   }
 });

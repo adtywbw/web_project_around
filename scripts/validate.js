@@ -10,75 +10,62 @@ import {
 
 // validasi profile
 export function validateProfile() {
-  // ambil nilai nama dan occupation
-  const nameValue = profileNameInput.value;
-  const occupationValue = profileOccupationInput.value;
-  // validasi nama
-  if (nameValue.length === 0) {
-    profileNameError.textContent = "Silahkan isi kolom ini.";
-  } else if (nameValue.length < 2 || nameValue.length > 40) {
-    profileNameError.textContent = `Harap perpanjang ini menjadi 2 karakter atau lebih. Anda saat ini menggunakan ${nameValue.length} karakter`;
-  } else {
-    profileNameError.textContent = "";
-  }
-  // validasi occupation
-  if (occupationValue.length === 0) {
-    profileOccupationError.textContent = "Silahkan isi kolom ini.";
-  } else if (occupationValue.length < 2 || occupationValue.length > 200) {
-    profileOccupationError.textContent = `Harap perpanjang ini menjadi 2 karakter atau lebih. Anda saat ini menggunakan ${occupationValue.length} karakter`;
-  } else {
-    profileOccupationError.textContent = "";
-  }
-  // disable tombol simpan jika validasi salah
-  if (
-    nameValue.length < 2 ||
-    nameValue > 40 ||
-    occupationValue.length < 2 ||
-    occupationValue > 200
-  ) {
+  // validasi nama dan occupation
+  const nameValidity = profileNameInput.validity;
+  const occupationValidity = profileOccupationInput.validity;
+  // Menggunakan validationMessage untuk mendapatkan pesan kesalahan jika ada
+  var nameErrorMessage = profileNameInput.validationMessage;
+  var occupationErrorMessage = profileOccupationInput.validationMessage;
+  // checkValidity name dan occupation, disable tombol simpan jika validasi invalid
+  if (!nameValidity.valid || !occupationValidity.valid) {
     profileSubmit.disabled = true;
     profileSubmit.classList.add("popup__button_disabled");
+    profileNameError.textContent = nameErrorMessage;
+    profileOccupationError.textContent = occupationErrorMessage;
   } else {
     profileSubmit.disabled = false;
     profileSubmit.classList.remove("popup__button_disabled");
+    profileNameError.textContent = "";
+    profileOccupationError.textContent = "";
   }
 }
 
 // VALIDASI FOR ADD BUTTON
 // mengimpor variabel yang dibutuhkan dari script.js
-import { addTitle, addUrl, titleError, urlError, addSubmit } from "./script.js";
+import {
+  addTitle,
+  addUrl,
+  addErrorTitle,
+  addErrorUrl,
+  addSubmit,
+} from "./script.js";
 export function validateForm() {
-  // trim spasi yang ada di input title dan url
-  const titleValue = addTitle.value.trim();
-  const urlValue = addUrl.value.trim();
+  // validasi judul dan url
+  const titleValidity = addTitle.validity;
+  const urlValidity = addUrl.validity;
+  // Menggunakan validationMessage untuk mendapatkan pesan kesalahan jika ada
+  var titleErrorMessage = addTitle.validationMessage;
+  var urlErrorMessage = addUrl.validationMessage;
 
-  // validasi judul
-  titleError.textContent = "";
-  if (titleValue === "") {
-    titleError.textContent = "Silahkan isi kolom ini.";
+  // checkValidity title
+  if (!titleValidity.valid) {
     addTitle.classList.add("add__item_red-border");
-  } else if (titleValue.length < 2 || titleValue.length > 30) {
-    titleError.textContent = `Harap perpanjang ini menjadi 2 karakter atau lebih. Anda saat ini menggunakan ${titleValue.length} karakter`;
-    addTitle.classList.add("add__item_red-border");
+    addErrorTitle.textContent = titleErrorMessage;
   } else {
-    titleError.textContent = "";
     addTitle.classList.remove("add__item_red-border");
+    addErrorTitle.textContent = "";
   }
-
-  // validasi url
-  urlError.textContent = "";
-  const urlPattern = /^(ftp|http|https):\/\/[^ "]+$/;
-  if (!urlPattern.test(urlValue)) {
-    urlError.textContent = "Silahkan masukan alamat web.";
+  // checkValidity title
+  if (!urlValidity.valid) {
     addUrl.classList.add("add__item_red-border");
+    addErrorUrl.textContent = urlErrorMessage;
   } else {
-    urlError.textContent = "";
     addUrl.classList.remove("add__item_red-border");
+    addErrorUrl.textContent = "";
   }
 
-  // disable tombol simpan jika validasi salah
-  addSubmit.disabled = titleValue === "" || !urlPattern.test(urlValue);
-  if ((addSubmit.disabled = titleValue === "" || !urlPattern.test(urlValue))) {
+  // disable tombol simpan jika validasi invalid
+  if (!titleValidity.valid || !urlValidity.valid) {
     addSubmit.disabled = true;
     addSubmit.classList.add("add__button_disabled");
   } else {
