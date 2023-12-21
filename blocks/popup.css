@@ -62,7 +62,7 @@
   line-height: 16.94px;
 }
 
-.popup__item:invalid {
+.popup__item_red-border {
   border-bottom: 1px solid red;
 }
 

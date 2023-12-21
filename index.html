@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Around The U.S.</title>
     <link rel="stylesheet" href="./pages/index.css" />
-    <script type="module" src="./scripts/validate.js"></script>
   </head>
   <body class="homepage">
     <header class="header">
@@ -103,7 +102,7 @@
 
       <div class="photo">
         <div class="photo__container">
-          <button class="photo__close" type="button"></button>
+          <button class="photo__close-button" type="button"></button>
           <img class="photo__picture" alt="a photo" />
           <p class="photo__name"></p>
         </div>
@@ -116,7 +115,7 @@
             <img class="gallery__picture" alt="gallery's picture" />
             <div class="gallery__tagname">
               <p class="gallery__name"></p>
-              <button class="gallery__love" type="button"></button>
+              <button class="gallery__like"></button>
             </div>
           </div>
         </template>
@@ -126,7 +125,9 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2021 Around The U.S.</p>
     </footer>
-    <script type="module" src="./scripts/script.js"></script>
-    <script type="module" src="./scripts/validate.js"></script>
+    <script type="module" src="./scripts/index.js"></script>
+    <script type="module" src="./scripts/Card.js"></script>
+    <script type="module" src="./scripts/FormValidator.js"></script>
+    <script type="module" src="./scripts/utils.js"></script>
   </body>
 </html>

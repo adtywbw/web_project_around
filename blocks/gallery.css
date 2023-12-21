@@ -61,7 +61,7 @@
   overflow: hidden;
 }
 
-.gallery__love {
+.gallery__like {
   background-image: url("../images/love.svg");
   background-size: contain;
   background-repeat: no-repeat;
@@ -72,11 +72,11 @@
   cursor: pointer;
 }
 
-.gallery__love_fill {
+.gallery__like_fill {
   background-image: url("../images/love-fill.svg");
 }
 
-.gallery__love:hover {
+.gallery__like:hover {
   opacity: 50%;
   transition: opacity 0.3s ease;
 }
