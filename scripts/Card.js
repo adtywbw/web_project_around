@@ -1,46 +1,47 @@
-// GALLERY INTIAL CARD FUNCTION
-// Ambil elemen galeri, photo, dan template dari DOM
-export const gallery = document.querySelector(".gallery");
-const gridItemTemplate = gallery.querySelector("#galleryItemTemplate");
-const photo = document.querySelector(".photo");
-const photoContainer = photo.querySelector(".photo__container");
-const photoPicture = photo.querySelector(".photo__picture");
-const photoName = photo.querySelector(".photo__name");
-
+// GALLERY INTIAL CLASS
 // Objek item
 export const initialCards = [
   {
     name: "Lembah Yosemite",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
+    liked: false,
   },
   {
     name: "Danau Louise",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
+    liked: false,
   },
   {
     name: "Pegunungan Gundul",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg",
+    liked: false,
   },
   {
     name: "Gunung Latemar",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg",
+    liked: false,
   },
   {
     name: "Taman Nasional Vanoise",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg",
+    liked: false,
   },
   {
     name: "Lago di Braies",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg",
+    liked: false,
   },
 ];
 
 export class Card {
   constructor(data, container, template) {
     this.data = data;
-    this.container = gallery;
-    this.template = gridItemTemplate;
-    this.overlay = photo;
+    this.container = document.querySelector(".gallery");
+    this.template = document.querySelector("#galleryItemTemplate");
+    this.overlay = document.querySelector(".photo");
+    this.photoContainer = this.overlay.querySelector(".photo__container");
+    this.photoPicture = this.overlay.querySelector(".photo__picture");
+    this.photoName = this.overlay.querySelector(".photo__name");
   }
 
   createGalleryElement() {
@@ -56,17 +57,27 @@ export class Card {
       deleteButton.addEventListener("click", () => this.deleteItem(index));
       // memberi event click ke tombol like pada item gallery
       const likeButton = clone.querySelector(".gallery__like");
-      likeButton.addEventListener("click", () => this.toggleLike(likeButton));
+      likeButton.addEventListener("click", () =>
+        this.toggleLike(likeButton, index)
+      );
+      // Set status "liked" berdasarkan data
+      if (data.liked === true) {
+        likeButton.classList.toggle("gallery__like_fill");
+      }
       // memberi event click ke picture pada item gallery agar dapat di zoom
       const photoButton = clone.querySelector(".gallery__picture");
       photoButton.addEventListener("click", () =>
         this.openPhoto(data.name, data.link)
       );
       // memberi event click ke tombol close saat item gallery di zoom
-      const photoCloseButton = photo.querySelector(".photo__close-button");
+      const photoCloseButton = this.overlay.querySelector(
+        ".photo__close-button"
+      );
       photoCloseButton.addEventListener("click", () => this.closePhoto());
       // memberi event click ke overlay saat item gallery di zoom
-      photo.addEventListener("click", () => this.closePhotoOverlay(event));
+      this.overlay.addEventListener("click", () =>
+        this.closePhotoOverlay(event)
+      );
       // Menambahkan item yang diisi ke dalam container gallery
       this.container.appendChild(clone);
     });
@@ -81,14 +92,17 @@ export class Card {
     this.createGalleryElement();
   }
 
-  toggleLike(likeButton) {
+  toggleLike(likeButton, index) {
     likeButton.classList.toggle("gallery__like_fill");
+
+    // Update status "liked" pada data
+    this.data[index].liked = !this.data[index].liked;
   }
 
   openPhoto(imgName, imgLink) {
     // Menetapkan URL gambar pada overlay sesuai dengan gambar yang diklik
-    photoName.textContent = imgName;
-    photoPicture.src = imgLink;
+    this.photoName.textContent = imgName;
+    this.photoPicture.src = imgLink;
     // Menampilkan overlay
     this.overlay.classList.add("photo__opened");
     // memberi event keydown tombol esc untuk menutup foto yang telah di zoom
@@ -102,7 +116,7 @@ export class Card {
   }
 
   closePhotoOverlay(event) {
-    if (!photoContainer.contains(event.target)) {
+    if (!this.photoContainer.contains(event.target)) {
       this.closePhoto();
     }
   }
@@ -115,5 +129,5 @@ export class Card {
 }
 
 // Membuat instance dari class Gallery
-export const card = new Card(initialCards, gallery, gridItemTemplate);
+export const card = new Card(initialCards, "container", "template");
 card.createGalleryElement();

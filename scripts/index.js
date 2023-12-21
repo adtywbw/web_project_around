@@ -28,6 +28,9 @@ export const addContainer = add.querySelector(".add__container");
 export const addForm = add.querySelector("#addForm");
 const addClose = add.querySelector(".add__close");
 
+export const gallery = document.querySelector(".gallery");
+const gridItemTemplate = gallery.querySelector("#galleryItemTemplate");
+
 // GALLERY INITIAL SECTION
 import { Card } from "./Card.js";
 // jalankan function initial card

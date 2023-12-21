@@ -108,7 +108,8 @@ export function closeEscAdd(event) {
 
 // saveaddform function
 // import variabel yang dibutuhkan
-import { initialCards, card, gallery } from "./Card.js";
+import { initialCards, card } from "./Card.js";
+import { gallery } from "./index.js";
 export function saveAddForm(event) {
   event.preventDefault(); // Mencegah pengiriman formulir
   // Menambah item baru ke objek data
