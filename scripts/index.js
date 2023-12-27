@@ -29,11 +29,16 @@ export const addForm = add.querySelector("#addForm");
 const addClose = add.querySelector(".add__close");
 
 export const gallery = document.querySelector(".gallery");
-const gridItemTemplate = gallery.querySelector("#galleryItemTemplate");
+export const galleryItemTemplate = gallery.querySelector(
+  "#galleryItemTemplate"
+);
 
 // GALLERY INITIAL SECTION
-import { Card } from "./Card.js";
-// jalankan function initial card
+import { initialCards, Card } from "./Card.js";
+// Buat instance dari kelas ArrayRenderer
+export const cardRenderer = new Card(initialCards, "galleryItemTemplate");
+// tampilkan elemen objek saat halaman dimuat
+cardRenderer.createObject();
 
 // PROFILE SECTION
 //import profile function

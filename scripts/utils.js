@@ -108,18 +108,23 @@ export function closeEscAdd(event) {
 
 // saveaddform function
 // import variabel yang dibutuhkan
-import { initialCards, card } from "./Card.js";
-import { gallery } from "./index.js";
+import { initialCards, Card } from "./Card.js";
+import { gallery, galleryItemTemplate, cardRenderer } from "./index.js";
 export function saveAddForm(event) {
   event.preventDefault(); // Mencegah pengiriman formulir
   // Menambah item baru ke objek data
-  initialCards.unshift({ name: addTitle.value, link: addUrl.value });
+  const newItem = {
+    name: addTitle.value,
+    link: addUrl.value,
+    liked: false,
+  };
+  // Tambahkan item baru ke dalam array di urutan pertama
+  initialCards.unshift(newItem);
+  // Render satu elemen kartu untuk item baru
+  const newCard = cardRenderer._createGalleryElement(newItem, 0);
+  gallery.insertBefore(newCard, gallery.firstChild);
   // Reset nilai input
   addForm.reset();
-  // Mengosongkan container
-  gallery.innerHTML = "";
-  // mengisi ulang gallery
-  card.createGalleryElement();
   // close form input
   add.classList.remove("add_opened");
 }

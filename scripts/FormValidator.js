@@ -4,7 +4,7 @@ export class FormValidator {
     this.formData = formData;
   }
 
-  validateProfileForm() {
+  _validateProfileForm() {
     const nameValidity = this.formData.profileNameInput.validity;
     const occupationValidity = this.formData.profileOccupationInput.validity;
     const nameErrorMessage = this.formData.profileNameInput.validationMessage;
@@ -42,7 +42,7 @@ export class FormValidator {
     }
   }
 
-  validateAddForm() {
+  _validateAddForm() {
     const titleValidity = this.formData.addTitle.validity;
     const urlValidity = this.formData.addUrl.validity;
     const titleErrorMessage = this.formData.addTitle.validationMessage;
@@ -77,19 +77,19 @@ export class FormValidator {
 
   enableValidation() {
     this.formData.profileNameInput.addEventListener("input", () => {
-      this.validateProfileForm();
+      this._validateProfileForm();
     });
 
     this.formData.profileOccupationInput.addEventListener("input", () => {
-      this.validateProfileForm();
+      this._validateProfileForm();
     });
 
     this.formData.addTitle.addEventListener("input", () => {
-      this.validateAddForm();
+      this._validateAddForm();
     });
 
     this.formData.addUrl.addEventListener("input", () => {
-      this.validateAddForm();
+      this._validateAddForm();
     });
   }
 }
